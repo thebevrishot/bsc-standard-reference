@@ -1,0 +1,23 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: StdReferenceProxy
+    network: mainnet
+    source:
+      address: "0xDA7a001b254CD22e46d3eAB04d937489c93174C3"
+      abi: StdReferenceProxy
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - OwnershipTransferred
+      abis:
+        - name: StdReferenceProxy
+          file: ./abis/StdReferenceProxy.json
+      eventHandlers:
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/mapping.ts
